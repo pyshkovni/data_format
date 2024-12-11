@@ -3,9 +3,6 @@ import os
 
 
 def count_csv_rows(folder_name, file_name):
-    folder_name = '/Users/maksimkrupkin/case/data_format/data'
-    file_name = 'weekly_IBM.csv'
-
     file_path = os.path.join(folder_name, file_name)
 
     with open(file_path, mode='r', newline='', encoding='utf-8') as file:
@@ -19,7 +16,7 @@ def count_csv_rows(folder_name, file_name):
                 file.write(str(row_count))
                 print("Число сохранено в файл 'number.txt'")
 
-folder_name = '/Users/maksimkrupkin/case/data_format/data'
+folder_name = f"{os.getcwd()}/data/"
 file_name = 'weekly_IBM.csv'
 row_count = count_csv_rows(folder_name, file_name)
 
