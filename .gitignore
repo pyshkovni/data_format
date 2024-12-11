@@ -8,12 +8,12 @@ __pycache__/
 .vscode/
 .idea/
 
-
+data_case/
 
 .venv/
 .env/
 
 data/
-output/
+
 
 *.csv
