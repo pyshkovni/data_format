@@ -1,0 +1,17 @@
+# created by virtualenv automatically
+
+__pycache__/
+*.py[cod]
+
+*.log
+
+.vscode/
+.idea/
+
+venv/
+.env/
+
+data/
+output/
+
+*.csv
