@@ -29,3 +29,18 @@ def write_csv(data, output_path):
             company = event.get('company')
             if link and company:
                 writer.writerow([link, company])
+                
+
+# Основной блок
+if __name__ == "__main__":
+    # Путь до исходного JSON-файла и выходного CSV-файла
+    input_file = 'data/events.json'
+    output_file = 'data/output.csv'
+
+    # Чтение JSON-файла
+    events_data = read_json(input_file)
+
+    # Запись данных в CSV
+    write_csv(events_data, output_file)
+
+    print(f"Данные успешно сохранены в файл: {output_file}")
