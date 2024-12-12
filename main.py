@@ -16,3 +16,14 @@ def extract_wind_directions(data):
     
     return wind_directions
 
+def process_wind_directions(json_file_path, output_file_path):
+        with open(json_file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+        wind_directions = extract_wind_directions(data)
+        wind_counts = Counter(wind_directions)
+        
+        with open(output_file_path, 'w', encoding='utf-8') as output_file:
+            output_file.write("Статистика направлений ветра:\n")
+            for direction, count in wind_counts.items():
+                output_file.write(f"{direction}: {count}\n")
+
