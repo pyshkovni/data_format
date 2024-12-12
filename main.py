@@ -27,3 +27,7 @@ def process_wind_directions(json_file_path, output_file_path):
             for direction, count in wind_counts.items():
                 output_file.write(f"{direction}: {count}\n")
 
+if __name__ == "__main__":
+    json_file_path = "data/Sochi24.09.06.json"
+    output_file_path = "data/wind_directions_count.txt"
+    process_wind_directions(json_file_path, output_file_path)
