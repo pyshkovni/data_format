@@ -7,3 +7,8 @@ data.set_index('timestamp', inplace=True)
 
 max_open = data.resample('YE')['open'].max()
 max_close = data.resample('YE')['close'].max()
+
+results = pd.DataFrame({
+    'Max_Open': max_open,
+    'Max_Close': max_close
+})
