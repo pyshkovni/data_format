@@ -12,3 +12,10 @@ results = pd.DataFrame({
     'Max_Open': max_open,
     'Max_Close': max_close
 })
+
+output_file = 'max_prices.txt'
+with open(output_file, 'w') as f:
+    f.write('Year\tMax_Open\tMax_Close\n')
+    for year, row in results.iterrows():
+        f.write(f"{year.year}\t{row['Max_Open']:.5f}\t{row['Max_Close']:.5f}\n")
+print(f"Данные записаны в файл {output_file}")
