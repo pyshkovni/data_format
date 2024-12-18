@@ -15,3 +15,6 @@ def process_csv_file(csv_filename, output_filename):
         output_file.write(f"Количество строк в таблице (исключая заголовок): {row_count}\n")
 
     print(f"Результат успешно записан в файл: {output_file_path}")
+    csv_filename = 'weekly_IBM.csv' 
+output_filename = 'output.txt'  
+process_csv_file(csv_filename, output_filename)
