@@ -1,10 +1,11 @@
 import json
 
-input_file = "Berlin24.09.06 (1).json"
+folder = "data"
+input_file = "Berlin24.09.06.json"
 output_file = "Berlin_temperatures.txt"
 
 def extract_temperature_data():
-    with open(input_file, 'r', encoding='utf-8') as file:
+    with open(f"{folder}\{input_file}", 'r', encoding='utf-8') as file:
         weather_data = json.load(file)
 
     with open(output_file, 'w', encoding='utf-8') as file:
