@@ -1,44 +1,26 @@
-# 1. Запишите в файл формата CSV следующую информацию из JSON-файла `Amsterdam24.09.06.json`: 
-# Как ощущается температуру _(feels_like)_ и какие погодные условия _(condition)_ в Амстердаме по часам?
+# Импорт
+import json
+from collections import Counter
 
-# 2. Запишите в файл формата TXT следующую информацию из JSON-файла `Berlin24.09.06.json`: 
-# Какая средняя, максимальная и минимальные температуры _(temp_avg, temp_max, temp_min)_ утром, днем, вечером, ночью в Берлине?
+# Функция
+def count_wind_directions(json_file_path, output_file_path):
+    with open(json_file_path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+    wind_directions = []
+    if 'fact' in data:
+        wind_directions.append(data['fact']['wind_dir'])
+    if 'forecasts' in data:
+        for forecast in data['forecasts']:
+            for part in forecast['parts'].values():
+                wind_directions.append(part['wind_dir'])
+            for hour in forecast['hours']:
+                wind_directions.append(hour['wind_dir'])
+    wind_count = Counter(wind_directions)
+    with open(output_file_path, 'w', encoding='utf-8') as output_file:
+        for direction, count in wind_count.most_common():
+            output_file.write(f"{direction}: {count}\n")
 
-# 3. Запишите в файл формата TXT следующую информацию из JSON-файла `Moscow24.09.06.json`: 
-# Какое фактическое состояние погоды _(fact)_ в Москве 07.09.2024?
-
-# 4. Запишите в файл формата CSV следующую информацию из JSON-файла `Rome24.09.06.json`: 
-# Таблица дат _(date)_, время восхода солнца _(sunrise)_ и заката _(sunset)_ в Риме.
-
-# 5. Запишите в файл формата CSV следующую информацию из JSON-файла `Saint-Petersburg24.09.06.json`: 
-# Какие погодные условия и атмосферное давление _(pressure_mm)_ по часам в Санкт-Петербурге 08.09.2024
-
-# 6. Запишите в файл формата TXT следующую информацию из JSON-файла `Sochi24.09.06.json`: 
-# Какие направления ветра _(wind_dir)_ встречались в данных о погоде в Сочи? Посчитайте количество каждого типа.
-
-# 7. Запишите в файл формата TXT следующую информацию из JSON-файла `events.json`: 
-# Какого формата мероприятия были запланированы? Посчитайте количество каждого типа.
-
-# 8. Запишите в файл формата CSV следующую информацию из JSON-файла `events.json`: 
-# Таблица ссылок на стажировки _(link)_ и названий компаний _(company)_.
-
-# 9. Запишите в файл формата TXT следующую информацию из CSV-файла `sales2019.csv`: 
-# Посчитайте сумму прибыли _(sale_profit)_ за 2019 год.
-
-# 10. Запишите в файл формата JSON следующую информацию из CSV-файла `crypto_intraday_5min_ETH_USD.csv`: 
-# Посчитайте за каждый час _(open)_ суммарное количество торгуемых токенов _(volume)_ на бирже.
-
-# 11. Запишите в файл формата JSON следующую информацию из CSV-файла `fx_daily_EUR_USD.csv`: 
-# Посчитайте за каждый месяц среднюю цену закрытия валютных торгов _(close)_.
-
-# 12. Запишите в файл формата TXT следующую информацию из CSV-файла `fx_weekly_EUR_USD.csv`: 
-# Посчитайте за каждый год максимальную цену открытия и максимальную цену закрытия валютных торгов
-
-# 13. Запишите в файл формата TXT следующую информацию из CSV-файла `weekly_IBM.csv`: 
-# Посчитайте количество строк в таблице.
-
-# 14. Запишите в файл формата JSON следующую информацию из YAML-файла `mkdocs.yml`: 
-# Найдите информацию о ссылках на социальные сети в блоке `social`.
-
-# 15. Запишите в файл формата CSV следующую информацию из YAML-файла `gitlab-ci.yml`: 
-# Посчитайте количество состояний `stage` каждого типа, которые встречаются в файле.
+# Запуск
+json_file_path = 'data/Sochi24.09.06.json'
+output_file_path = 'wind_directions_count.txt'
+count_wind_directions(json_file_path, output_file_path)
